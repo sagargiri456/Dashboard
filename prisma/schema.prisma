@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // previewFeatures = ["mongodb"]
+}
+
+// prisma/schema.prisma
+datasource db {
+  provider  = "postgresql"
+  url  	    = env("DATABASE_URL")
+  // uncomment next line if you use Prisma <5.10
+  // directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model notification {
+  id        Int      @id @default(autoincrement())
+  title     String
+  message   String
+  // createdAt DateTime @default(now())
+}
+
+
+model assets{
+  id        Int      @id @default(autoincrement())
+  name String
+  url String
+  size Float
+}
+
+model uploadedFile {
+  id            String   @id @default(cuid())
+  name          String
+  url           String
+  size          Int
+  key           String
+}
+model Query {
+  id        String   @id @default(cuid())
+  clientId  String
+  query     String
+  answer    String?  // Nullable for unanswered queries
+  status    String   @default("pending") // Enum-like values: "pending", "answered"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

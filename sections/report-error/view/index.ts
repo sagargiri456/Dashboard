@@ -1,0 +1,1 @@
+export { default as ReportErrorPage } from './report-error-page';

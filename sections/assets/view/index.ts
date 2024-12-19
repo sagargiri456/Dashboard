@@ -1,0 +1,1 @@
+export { default as AssetsViewPage } from './asset-page';
